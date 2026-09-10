@@ -50,7 +50,7 @@ class ServerTestCase(unittest.TestCase):
         self.assertEqual(status, 405)
 
     def test_unknown_path_not_found(self):
-        status, _, _ = self.request("GET", "/nope")
+        status, _, _ = self.request("GET", "/unknown")
         self.assertEqual(status, 404)
 
 
