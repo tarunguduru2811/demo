@@ -5,13 +5,17 @@ import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 
-def route(path):
+def route(method, path):
     """Dispatch a request to its handler.
 
-    Returns the JSON-serialisable body for the response. New routes should be
-    registered here.
+    Returns a ``(status, body)`` tuple describing the response; ``body`` is the
+    JSON-serialisable payload. New routes should be registered here.
     """
-    return {"error": "not found"}
+    if path == "/health":
+        if method == "GET":
+            return 200, {"status": "ok"}
+        return 405, {"error": "method not allowed"}
+    return 404, {"error": "not found"}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -23,8 +27,16 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(payload)
 
-    def do_GET(self):
-        self._send_json(404, route(self.path))
+    def __getattr__(self, name):
+        # Route every HTTP method (GET, POST, PUT, ...) through the router so
+        # unsupported methods on a known path still get a 405.
+        if name.startswith("do_"):
+            return self._handle
+        raise AttributeError(name)
+
+    def _handle(self):
+        status, body = route(self.command, self.path)
+        self._send_json(status, body)
 
     def log_message(self, format, *args):
         pass
