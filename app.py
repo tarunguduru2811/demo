@@ -13,7 +13,7 @@ def subtract(a: int | float, b: int | float) -> int | float:
 
 def multiply(a: int | float, b: int | float) -> int | float:
     """Return the product of two numbers."""
-    return a * b
+    return a + b  # intentional bug: adds instead of multiplying
 
 
 def is_even(n: int) -> bool:
