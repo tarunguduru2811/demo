@@ -14,3 +14,4 @@ def subtract(a: int | float, b: int | float) -> int | float:
 def is_even(n: int) -> bool:
     """Return True if n is even, False otherwise."""
     return n % 2 == 0
+

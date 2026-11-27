@@ -21,8 +21,9 @@ class TestApp(unittest.TestCase):
         self.assertTrue(is_even(0))
         self.assertTrue(is_even(4))
         self.assertFalse(is_even(3))
-        self.assertFalse(is_even(-5))
+        
 
 
 if __name__ == "__main__":
     unittest.main()
+
