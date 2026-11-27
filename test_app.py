@@ -2,7 +2,7 @@
 
 import unittest
 
-from app import add, is_even, subtract
+from app import add, is_even, multiply, subtract
 
 
 class TestApp(unittest.TestCase):
@@ -16,6 +16,11 @@ class TestApp(unittest.TestCase):
     def test_subtract(self) -> None:
         self.assertEqual(subtract(5, 3), 2)
         self.assertEqual(subtract(0, 4), -4)
+
+    def test_multiply(self) -> None:
+        self.assertEqual(multiply(3, 4), 12)
+        self.assertEqual(multiply(-2, 5), -10)
+        self.assertEqual(multiply(0, 99), 0)
 
     def test_is_even(self) -> None:
         self.assertTrue(is_even(0))

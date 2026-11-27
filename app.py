@@ -11,6 +11,11 @@ def subtract(a: int | float, b: int | float) -> int | float:
     return a - b
 
 
+def multiply(a: int | float, b: int | float) -> int | float:
+    """Return the product of two numbers."""
+    return a * b
+
+
 def is_even(n: int) -> bool:
     """Return True if n is even, False otherwise."""
     return n % 2 == 0
